@@ -2,10 +2,10 @@
 
 class RoomsController < ApplicationController
   def show
-    raise ActionController::RoutingError.new('Source not Found') unless params[:source] == 'guardian'
+    raise ActionController::RoutingError.new('Source not Found') unless params[:source].in?(['guardian','local'])
     raise ActionController::RoutingError.new('Series not Found') unless params[:series].in?(Series::SERIES)
     @crossword = crossword
-    @parsed_crossword = JSON.parse(crossword)
+    @parsed_crossword = crossword
     @url = url
   end
 
@@ -16,9 +16,13 @@ class RoomsController < ApplicationController
 
   def crossword
     if redis.exists(crossword_identifier)
-      redis.get(crossword_identifier)
+      JSON.parse(redis.get(crossword_identifier))
     else
-      get_crossword_data.tap {|data| redis.set(crossword_identifier, data) }
+      if params[:source] == 'local'
+        JSON.parse(get_crossword_data_from_disk.tap {|data| redis.set(crossword_identifier, data) })
+      else
+        JSON.parse(get_crossword_data.tap {|data| redis.set(crossword_identifier, data) })
+      end
     end
   end
 
@@ -28,6 +32,12 @@ class RoomsController < ApplicationController
     crossword_element = html.css('.js-crossword')
     raise ActionController::RoutingError.new('Element not Found') unless crossword_element.any?
     crossword_element.first['data-crossword-data']
+  end
+  
+  def get_crossword_data_from_disk
+    path = "./data/#{params[:series]}/#{params[:identifier]}.json"
+    file = File.read(path)
+    return file
   end
 
   def url

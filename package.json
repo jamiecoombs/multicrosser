@@ -5,9 +5,9 @@
     "@babel/preset-react": "^7.0.0",
     "@rails/webpacker": "5.0.1",
     "actioncable": "^5.2.1",
+    "jamie-react-crossword": "file:../react-crossword",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-crossword": "^0.2.0",
     "react-dom": "^16.6.3"
   },
   "devDependencies": {

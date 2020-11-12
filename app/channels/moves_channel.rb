@@ -6,17 +6,17 @@ class MovesChannel < ApplicationCable::Channel
     grid = Array.new(20) { Array.new(20) }
 
     data.each {|k, v|
-      x, y = k.split('-')
+      x, y, author = k.split('-')
       next if x.nil? or y.nil?
       next unless x.to_i.in?(0..20) && y.to_i.in?(0..20)
-      grid[x.to_i][y.to_i] = v
+      grid[x.to_i][y.to_i] = {"v" => v, "author" => author}
     }
 
     transmit({'initialState': grid})
   end
 
   def move(data)
-    redis.hmset(channel_name, "#{data['x']}-#{data['y']}", data['value'])
+    redis.hmset(channel_name, "#{data['x']}-#{data['y']}-#{data['author']}", data['value'])
     ActionCable.server.broadcast(channel_name, data)
   end
 

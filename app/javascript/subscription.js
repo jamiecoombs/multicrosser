@@ -10,6 +10,7 @@ const createSubscription = function createSubscription(crossword, room, onReceiv
     {
       received: function received(data) {
         if (data.initialState) {
+        console.log(data.initialState);
           onInitialState(data.initialState);
         } else {
           onReceiveMove(data);

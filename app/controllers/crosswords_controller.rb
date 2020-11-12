@@ -4,6 +4,7 @@ class CrosswordsController < ApplicationController
       source: params[:source],
       series: params[:series],
       identifier: params[:identifier],
+      participant: params[:participant],
       room: SecureRandom.uuid
     )
   end
