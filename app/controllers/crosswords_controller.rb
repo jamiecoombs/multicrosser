@@ -1,6 +1,6 @@
 class CrosswordsController < ApplicationController
   def show
-    redirect_to room_path(
+    redirect_to room_url(
       source: params[:source],
       series: params[:series],
       identifier: params[:identifier],

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => "/cable"
   root 'page#index'
 
   get 'crossword/:source/:series/:identifier/:participant/:room', to: 'rooms#show', as: 'room'
