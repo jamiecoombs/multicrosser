@@ -1,6 +1,6 @@
 
 
-class RoomsController < ApplicationController
+class CrosswordController < ApplicationController
   def show
     raise ActionController::RoutingError.new('Source not Found') unless params[:source].in?(['guardian','local'])
     raise ActionController::RoutingError.new('Series not Found') unless params[:series].in?(Series::SERIES)

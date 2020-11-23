@@ -1,16 +1,31 @@
 <p class="intro">
   Pick one of the crosswords below then share the link with friends to solve together.
 </p>
-
+<p>Please enter your name <input type="text" value="<%= @participant %>" id="participant" name="participant" autofocus/>
+</p>
 <%- @series_with_crosswords.each do |series, crosswords| -%>
   <h3><%= series.titleize %></h3>
   <ul>
-  <%- crosswords.each do |crossword| -%>
+  <%- crosswords.sort_by { |c| c.date }.reverse.each do |crossword| -%>
     <li>
-      <%= link_to(crossword.name, crossword_path(crossword.source, crossword.series, crossword.identifier)) %>
+      <%= link_to(crossword.name, crossword_path(@room, crossword.source, crossword.series, crossword.identifier, @participant), class: "crossword-link") %>
     </li>
   <%- end -%>
   </ul>
 <%- end -%>
+<script>
+	document.getElementById('participant').select();
 
+	/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+	function updateParticipant() {
+	  participant = document.getElementById('participant');
+	  new_href = this.href.replace(/[^\/]+$/, participant.value);
+	  this.href = new_href;
+	}
+	var x = document.getElementsByClassName("crossword-link");
+	var i;
+	for (i = 0; i < x.length; i++) {
+	  x[i].onclick = updateParticipant;
+	}
+</script>
 
