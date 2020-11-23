@@ -1,4 +1,4 @@
-<p><a href="<%= request.referrer %>">&lt;&lt; Back to list</a></p>
+<p><a href="<%= page_url(room: params[:room], participant: params[:participant]) %>">&lt;&lt; Back to list</a></p>
 <h1><%= @parsed_crossword['name'] %></h1>
 <p>
   <%= Time.at(@parsed_crossword['date']/1000).to_date.strftime("%A %-d %B") %>
