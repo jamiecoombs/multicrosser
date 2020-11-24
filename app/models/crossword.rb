@@ -16,12 +16,13 @@ class Crossword
 
   def name
     formatted_time = date.strftime("%A %-d %b")
-    if title.include?(' No ')
-      number = title.split(' No ').last
-      "#{formatted_time} (No #{number})"
-    else
-      "#{formatted_time}"
-    end
+    #if title.include?(' No ')
+    #  number = title.split(' No ').last
+    #  "#{formatted_time} (No #{number})"
+    #else
+    #  "#{formatted_time}"
+    #end
+    "#{title} (#{formatted_time})"
   end
 
   def ==(other)
