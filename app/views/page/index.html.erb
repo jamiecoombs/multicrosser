@@ -1,7 +1,4 @@
-<p class="intro">
-  Pick one of the crosswords below then share the link with friends to solve together.
-</p>
-<p>Please enter your name <input type="text" value="<%= @participant %>" id="participant" name="participant" autofocus/>
+<p class="intro">Please enter your name then click one of the links below <input type="text" value="<%= @participant %>" id="participant" name="participant" autofocus/>
 </p>
 <%- @series_with_crosswords.each do |series, crosswords| -%>
   <h3><%= series.titleize %></h3>
