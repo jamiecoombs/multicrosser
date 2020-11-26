@@ -17,6 +17,8 @@ class Series
       
     local_files.each do |path|
       file_json = JSON.parse(File.read(path))
+      dt = Time.at(file_json["date"]/1000).utc.to_datetime.strftime("%FT%TZ")
+      next if dt > Time.now
       local_data[file_json["crosswordType"]] ||= []
       local_data[file_json["crosswordType"]].push(Crossword.new({
         'series' => file_json["crosswordType"],
@@ -24,7 +26,7 @@ class Series
         'title' => file_json["name"],
         'source' => 'local',
         'identifier' => file_json["id"],
-        'date' => Time.at(file_json["date"]/1000).utc.to_datetime.strftime("%FT%TZ")
+        'date' => dt
       }))
     end
     local_data
