@@ -77,6 +77,15 @@ body {
   color: #FFF;
 }
 
+.banner h2 {
+  display: inline;
+}
+
+.banner #back-link {
+  float: right;
+  font-size: 1.2em;
+}
+
 .intro {
   margin-top: 0;
 }
