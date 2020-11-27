@@ -4317,7 +4317,7 @@ isstream@~0.1.2:
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
 "jamie-react-crossword@file:../react-crossword":
-  version "0.2.20"
+  version "0.2.32"
   dependencies:
     bean "~1.0.14"
     bonzo "~2.0.0"
